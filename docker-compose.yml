@@ -2,6 +2,9 @@ version: '3.8'
 
 services:
   api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     image: ghcr.io/coolcodersj/hcgateway:latest
     ports:
       - "6644:6644"  # Map port 6644 on the host to 6644 in the container
@@ -9,6 +12,8 @@ services:
       - ./api/.env  # Pass environment variables from ./api/.env
     container_name: hcgateway_api  # Assign a name to the container
     restart: always  # Automatically restart the container if it crashes
+    depends_on:
+      - db
 
   db:
     image: mongo
@@ -20,4 +25,4 @@ services:
     container_name: hcgateway_db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_PASSWORD: root

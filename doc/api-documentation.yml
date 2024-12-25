@@ -5,7 +5,7 @@ info:
   title: HCGateway
   description: ''
 servers:
-- url: https://api.hcgateway.shuchir.dev
+- url: http://localhost:6644
 paths:
   "/api/v2/login":
     post:
